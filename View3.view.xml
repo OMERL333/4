@@ -1,0 +1,14 @@
+<mvc:View controllerName="project1.controller.View3"
+  xmlns:mvc="sap.ui.core.mvc"
+  displayBlock="true"
+  xmlns="sap.m">
+
+  <Page id="page" title="{i18n>view3Title}">
+    <content>
+      <!-- Your content for displaying the list of jobs goes here -->
+      <List id="jobList" items="{/jobs}">
+        <StandardListItem id="jobListItem{jobId}" title="{jobTitle}" press="onJobListItemPress" />
+      </List>
+    </content>
+  </Page>
+</mvc:View>

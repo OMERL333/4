@@ -1,0 +1,39 @@
+<mvc:View controllerName="project1.controller.View1"
+   xmlns:mvc="sap.ui.core.mvc"
+   displayBlock="true"
+   xmlns="sap.m">
+
+   <Page id="page" title="{i18n>title}">
+     <content>
+     
+       <FlexBox
+         id="mainFlexBox"
+         alignItems="Center"
+         justifyContent="Center"
+         height="100%"
+         direction="Column">
+
+           <Label text="Username" id="usernameLabel" />
+          <Input value="{/username}" id="usernameInput" />
+
+          <Label text="Password" id="passwordLabel" />
+          <Input type="Password" value="{/password}" id="passwordInput" />
+         <FlexBox
+         
+           id="buttonContainer"
+           direction="Column"
+           justifyContent="Center"
+           alignItems="Center"
+           width="100%">
+
+
+           <Button text="Login" press="onLoginPress" id="loginButton"  ></Button>
+           <Button text="Register" press="onRegisterPress" id="registerButton" ></Button>
+
+
+         </FlexBox>
+
+       </FlexBox>
+     </content>
+   </Page>
+</mvc:View>

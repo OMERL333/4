@@ -1,0 +1,37 @@
+<mvc:View controllerName="project1.controller.View4"
+  xmlns:mvc="sap.ui.core.mvc"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:unified="sap.ui.unified">
+
+  <Page id="page" title="{i18n>view4Title}">
+    <content>
+      <VBox id="mainVBox" alignItems="Center" justifyContent="Center">
+
+        <!-- Add your content here -->
+
+      </VBox>
+
+      <unified:FileUploader
+        id="fileUploader"
+        name="myFileUpload"
+        uploadUrl="/your/upload/url"
+        buttonText="Upload CV"
+        fileType="pdf"
+        mimeType="application/pdf"
+        buttonOnly="true"
+        change="onFileUploadChange" />
+
+      <FlexBox
+        id="buttonContainer"
+        justifyContent="SpaceBetween"
+        width="100%">
+
+        <Button id="backButton" text="Back" press="onBackButtonPress" />
+        <Button id="sendButton" text="Send" press="onSendButtonPress" />
+
+      </FlexBox>
+
+    </content>
+  </Page>
+</mvc:View>

@@ -1,0 +1,37 @@
+<mvc:View controllerName="project1.controller.View2"
+   xmlns:mvc="sap.ui.core.mvc"
+   displayBlock="true"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core">
+
+   <Page id="page" title="{i18n>view2Title}">
+     <content>
+       <VBox id="registrationForm" alignItems="Center" justifyContent="Center">
+         <Label text="Username" id="usernameLabel" />
+         <Input id="usernameInput" />
+
+         <Label text="First Name" id="firstNameLabel" />
+         <Input id="firstNameInput" />
+
+         <Label text="Surname" id="surnameLabel" />
+         <Input id="surnameInput" />
+
+         <Label text="Role" id="roleLabel" />
+         <Select id="roleSelect" items="{/roles}">
+           <core:Item key="{roleId}" text="{roleName}" id="roleItem{roleId}" />
+         </Select>
+
+         <Label text="Email" id="emailLabel" />
+         <Input id="emailInput" />
+
+         <Label text="Password" id="passwordLabel" />
+         <Input id="passwordInput" type="Password" />
+
+         <Label text="Confirm Password" id="confirmPasswordLabel" />
+         <Input id="confirmPasswordInput" type="Password" />
+
+         <Button text="Finish Registration" press="onFinishRegistration" id="finishRegistrationButton" />
+       </VBox>
+     </content>
+   </Page>
+</mvc:View>
