@@ -1,90 +1,107 @@
 {
-  "_from": "ansi-regex@^6.0.1",
-  "_id": "ansi-regex@6.0.1",
+  "_from": "@jridgewell/sourcemap-codec@^1.4.15",
+  "_id": "@jridgewell/sourcemap-codec@1.4.15",
   "_inBundle": false,
-  "_integrity": "sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==",
-  "_location": "/@isaacs/cliui/ansi-regex",
+  "_integrity": "sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==",
+  "_location": "/@jridgewell/sourcemap-codec",
   "_phantomChildren": {},
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "ansi-regex@^6.0.1",
-    "name": "ansi-regex",
-    "escapedName": "ansi-regex",
-    "rawSpec": "^6.0.1",
+    "raw": "@jridgewell/sourcemap-codec@^1.4.15",
+    "name": "@jridgewell/sourcemap-codec",
+    "escapedName": "@jridgewell%2fsourcemap-codec",
+    "scope": "@jridgewell",
+    "rawSpec": "^1.4.15",
     "saveSpec": null,
-    "fetchSpec": "^6.0.1"
+    "fetchSpec": "^1.4.15"
   },
   "_requiredBy": [
-    "/@isaacs/cliui/strip-ansi"
+    "/@jridgewell/gen-mapping",
+    "/@ui5/builder"
   ],
-  "_resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-6.0.1.tgz",
-  "_shasum": "3183e38fae9a65d7cb5e53945cd5897d0260a06a",
-  "_spec": "ansi-regex@^6.0.1",
-  "_where": "c:\\Users\\User\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\project1\\node_modules\\@isaacs\\cliui\\node_modules\\strip-ansi",
+  "_resolved": "https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.15.tgz",
+  "_shasum": "d7c6e6755c78567a951e04ab52ef0fd26de59f32",
+  "_spec": "@jridgewell/sourcemap-codec@^1.4.15",
+  "_where": "c:\\Users\\User\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\project1\\node_modules\\@ui5\\builder",
   "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "https://sindresorhus.com"
+    "name": "Rich Harris"
   },
   "bugs": {
-    "url": "https://github.com/chalk/ansi-regex/issues"
+    "url": "https://github.com/jridgewell/sourcemap-codec/issues"
   },
   "bundleDependencies": false,
   "deprecated": false,
-  "description": "Regular expression for matching ANSI escape codes",
+  "description": "Encode/decode sourcemap mappings",
   "devDependencies": {
-    "ava": "^3.15.0",
-    "tsd": "^0.14.0",
-    "xo": "^0.38.2"
+    "@rollup/plugin-typescript": "8.3.0",
+    "@types/node": "17.0.15",
+    "@typescript-eslint/eslint-plugin": "5.10.0",
+    "@typescript-eslint/parser": "5.10.0",
+    "benchmark": "2.1.4",
+    "c8": "7.11.2",
+    "eslint": "8.7.0",
+    "eslint-config-prettier": "8.3.0",
+    "mocha": "9.2.0",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.5.1",
+    "rollup": "2.64.0",
+    "source-map": "0.6.1",
+    "source-map-js": "1.0.2",
+    "sourcemap-codec": "1.4.8",
+    "typescript": "4.5.4"
   },
-  "engines": {
-    "node": ">=12"
+  "exports": {
+    ".": [
+      {
+        "types": "./dist/types/sourcemap-codec.d.ts",
+        "browser": "./dist/sourcemap-codec.umd.js",
+        "require": "./dist/sourcemap-codec.umd.js",
+        "import": "./dist/sourcemap-codec.mjs"
+      },
+      "./dist/sourcemap-codec.umd.js"
+    ],
+    "./package.json": "./package.json"
   },
-  "exports": "./index.js",
   "files": [
-    "index.js",
-    "index.d.ts"
+    "dist"
   ],
-  "funding": "https://github.com/chalk/ansi-regex?sponsor=1",
-  "homepage": "https://github.com/chalk/ansi-regex#readme",
+  "homepage": "https://github.com/jridgewell/sourcemap-codec#readme",
   "keywords": [
-    "ansi",
-    "styles",
-    "color",
-    "colour",
-    "colors",
-    "terminal",
-    "console",
-    "cli",
-    "string",
-    "tty",
-    "escape",
-    "formatting",
-    "rgb",
-    "256",
-    "shell",
-    "xterm",
-    "command-line",
-    "text",
-    "regex",
-    "regexp",
-    "re",
-    "match",
-    "test",
-    "find",
-    "pattern"
+    "sourcemap",
+    "vlq"
   ],
   "license": "MIT",
-  "name": "ansi-regex",
+  "main": "dist/sourcemap-codec.umd.js",
+  "module": "dist/sourcemap-codec.mjs",
+  "name": "@jridgewell/sourcemap-codec",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chalk/ansi-regex.git"
+    "url": "git+https://github.com/jridgewell/sourcemap-codec.git"
   },
   "scripts": {
-    "test": "xo && ava && tsd",
-    "view-supported": "node fixtures/view-codes.js"
+    "benchmark": "run-s build:rollup benchmark:*",
+    "benchmark:install": "cd benchmark && npm install",
+    "benchmark:only": "node --expose-gc benchmark/index.js",
+    "build": "run-s -n build:*",
+    "build:rollup": "rollup -c rollup.config.js",
+    "build:ts": "tsc --project tsconfig.build.json",
+    "lint": "run-s -n lint:*",
+    "lint:prettier": "npm run test:lint:prettier -- --write",
+    "lint:ts": "npm run test:lint:ts -- --fix",
+    "prebuild": "rm -rf dist",
+    "prepublishOnly": "npm run preversion",
+    "pretest": "run-s build:rollup",
+    "preversion": "run-s test build",
+    "test": "run-s -n test:lint test:only",
+    "test:coverage": "c8 mocha",
+    "test:debug": "mocha --inspect-brk",
+    "test:lint": "run-s -n test:lint:*",
+    "test:lint:prettier": "prettier --check '{src,test}/**/*.ts'",
+    "test:lint:ts": "eslint '{src,test}/**/*.ts'",
+    "test:only": "mocha",
+    "test:watch": "mocha --watch"
   },
-  "type": "module",
-  "version": "6.0.1"
+  "types": "dist/types/sourcemap-codec.d.ts",
+  "version": "1.4.15"
 }
