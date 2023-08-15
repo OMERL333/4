@@ -1,97 +1,236 @@
-// Type definitions for Chalk
-// Definitions by: Thomas Sauer <https://github.com/t-sauer>
+export interface CSPair { // eslint-disable-line @typescript-eslint/naming-convention
+	/**
+	The ANSI terminal control sequence for starting this style.
+	*/
+	readonly open: string;
 
-export const enum Level {
-	None = 0,
-	Basic = 1,
-	Ansi256 = 2,
-	TrueColor = 3
+	/**
+	The ANSI terminal control sequence for ending this style.
+	*/
+	readonly close: string;
 }
 
-export interface ChalkOptions {
-	enabled?: boolean;
-	level?: Level;
+export interface ColorBase {
+	/**
+	The ANSI terminal control sequence for ending this color.
+	*/
+	readonly close: string;
+
+	ansi(code: number): string;
+
+	ansi256(code: number): string;
+
+	ansi16m(red: number, green: number, blue: number): string;
 }
 
-export interface ChalkConstructor {
-	new (options?: ChalkOptions): Chalk;
-	(options?: ChalkOptions): Chalk;
+export interface Modifier {
+	/**
+	Resets the current color chain.
+	*/
+	readonly reset: CSPair;
+
+	/**
+	Make text bold.
+	*/
+	readonly bold: CSPair;
+
+	/**
+	Emitting only a small amount of light.
+	*/
+	readonly dim: CSPair;
+
+	/**
+	Make text italic. (Not widely supported)
+	*/
+	readonly italic: CSPair;
+
+	/**
+	Make text underline. (Not widely supported)
+	*/
+	readonly underline: CSPair;
+
+	/**
+	Make text overline.
+
+	Supported on VTE-based terminals, the GNOME terminal, mintty, and Git Bash.
+	*/
+	readonly overline: CSPair;
+
+	/**
+	Inverse background and foreground colors.
+	*/
+	readonly inverse: CSPair;
+
+	/**
+	Prints the text, but makes it invisible.
+	*/
+	readonly hidden: CSPair;
+
+	/**
+	Puts a horizontal line through the center of the text. (Not widely supported)
+	*/
+	readonly strikethrough: CSPair;
 }
 
-export interface ColorSupport {
-	level: Level;
-	hasBasic: boolean;
-	has256: boolean;
-	has16m: boolean;
+export interface ForegroundColor {
+	readonly black: CSPair;
+	readonly red: CSPair;
+	readonly green: CSPair;
+	readonly yellow: CSPair;
+	readonly blue: CSPair;
+	readonly cyan: CSPair;
+	readonly magenta: CSPair;
+	readonly white: CSPair;
+
+	/**
+	Alias for `blackBright`.
+	*/
+	readonly gray: CSPair;
+
+	/**
+	Alias for `blackBright`.
+	*/
+	readonly grey: CSPair;
+
+	readonly blackBright: CSPair;
+	readonly redBright: CSPair;
+	readonly greenBright: CSPair;
+	readonly yellowBright: CSPair;
+	readonly blueBright: CSPair;
+	readonly cyanBright: CSPair;
+	readonly magentaBright: CSPair;
+	readonly whiteBright: CSPair;
 }
 
-export interface Chalk {
-	(...text: string[]): string;
-	(text: TemplateStringsArray, ...placeholders: string[]): string;
-	constructor: ChalkConstructor;
-	enabled: boolean;
-	level: Level;
-	rgb(r: number, g: number, b: number): this;
-	hsl(h: number, s: number, l: number): this;
-	hsv(h: number, s: number, v: number): this;
-	hwb(h: number, w: number, b: number): this;
-	bgHex(color: string): this;
-	bgKeyword(color: string): this;
-	bgRgb(r: number, g: number, b: number): this;
-	bgHsl(h: number, s: number, l: number): this;
-	bgHsv(h: number, s: number, v: number): this;
-	bgHwb(h: number, w: number, b: number): this;
-	hex(color: string): this;
-	keyword(color: string): this;
+export interface BackgroundColor {
+	readonly bgBlack: CSPair;
+	readonly bgRed: CSPair;
+	readonly bgGreen: CSPair;
+	readonly bgYellow: CSPair;
+	readonly bgBlue: CSPair;
+	readonly bgCyan: CSPair;
+	readonly bgMagenta: CSPair;
+	readonly bgWhite: CSPair;
 
-	readonly reset: this;
-	readonly bold: this;
-	readonly dim: this;
-	readonly italic: this;
-	readonly underline: this;
-	readonly inverse: this;
-	readonly hidden: this;
-	readonly strikethrough: this;
+	/**
+	Alias for `bgBlackBright`.
+	*/
+	readonly bgGray: CSPair;
 
-	readonly visible: this;
+	/**
+	Alias for `bgBlackBright`.
+	*/
+	readonly bgGrey: CSPair;
 
-	readonly black: this;
-	readonly red: this;
-	readonly green: this;
-	readonly yellow: this;
-	readonly blue: this;
-	readonly magenta: this;
-	readonly cyan: this;
-	readonly white: this;
-	readonly gray: this;
-	readonly grey: this;
-	readonly blackBright: this;
-	readonly redBright: this;
-	readonly greenBright: this;
-	readonly yellowBright: this;
-	readonly blueBright: this;
-	readonly magentaBright: this;
-	readonly cyanBright: this;
-	readonly whiteBright: this;
-
-	readonly bgBlack: this;
-	readonly bgRed: this;
-	readonly bgGreen: this;
-	readonly bgYellow: this;
-	readonly bgBlue: this;
-	readonly bgMagenta: this;
-	readonly bgCyan: this;
-	readonly bgWhite: this;
-	readonly bgBlackBright: this;
-	readonly bgRedBright: this;
-	readonly bgGreenBright: this;
-	readonly bgYellowBright: this;
-	readonly bgBlueBright: this;
-	readonly bgMagentaBright: this;
-	readonly bgCyanBright: this;
-	readonly bgWhiteBright: this;
+	readonly bgBlackBright: CSPair;
+	readonly bgRedBright: CSPair;
+	readonly bgGreenBright: CSPair;
+	readonly bgYellowBright: CSPair;
+	readonly bgBlueBright: CSPair;
+	readonly bgCyanBright: CSPair;
+	readonly bgMagentaBright: CSPair;
+	readonly bgWhiteBright: CSPair;
 }
 
-declare const chalk: Chalk & { supportsColor: ColorSupport };
+export interface ConvertColor {
+	/**
+	Convert from the RGB color space to the ANSI 256 color space.
 
-export default chalk
+	@param red - (`0...255`)
+	@param green - (`0...255`)
+	@param blue - (`0...255`)
+	*/
+	rgbToAnsi256(red: number, green: number, blue: number): number;
+
+	/**
+	Convert from the RGB HEX color space to the RGB color space.
+
+	@param hex - A hexadecimal string containing RGB data.
+	*/
+	hexToRgb(hex: string): [red: number, green: number, blue: number];
+
+	/**
+	Convert from the RGB HEX color space to the ANSI 256 color space.
+
+	@param hex - A hexadecimal string containing RGB data.
+	*/
+	hexToAnsi256(hex: string): number;
+
+	/**
+	Convert from the ANSI 256 color space to the ANSI 16 color space.
+
+	@param code - A number representing the ANSI 256 color.
+	*/
+	ansi256ToAnsi(code: number): number;
+
+	/**
+	Convert from the RGB color space to the ANSI 16 color space.
+
+	@param red - (`0...255`)
+	@param green - (`0...255`)
+	@param blue - (`0...255`)
+	*/
+	rgbToAnsi(red: number, green: number, blue: number): number;
+
+	/**
+	Convert from the RGB HEX color space to the ANSI 16 color space.
+
+	@param hex - A hexadecimal string containing RGB data.
+	*/
+	hexToAnsi(hex: string): number;
+}
+
+/**
+Basic modifier names.
+*/
+export type ModifierName = keyof Modifier;
+
+/**
+Basic foreground color names.
+
+[More colors here.](https://github.com/chalk/chalk/blob/main/readme.md#256-and-truecolor-color-support)
+*/
+export type ForegroundColorName = keyof ForegroundColor;
+
+/**
+Basic background color names.
+
+[More colors here.](https://github.com/chalk/chalk/blob/main/readme.md#256-and-truecolor-color-support)
+*/
+export type BackgroundColorName = keyof BackgroundColor;
+
+/**
+Basic color names. The combination of foreground and background color names.
+
+[More colors here.](https://github.com/chalk/chalk/blob/main/readme.md#256-and-truecolor-color-support)
+*/
+export type ColorName = ForegroundColorName | BackgroundColorName;
+
+/**
+Basic modifier names.
+*/
+export const modifierNames: readonly ModifierName[];
+
+/**
+Basic foreground color names.
+*/
+export const foregroundColorNames: readonly ForegroundColorName[];
+
+/**
+Basic background color names.
+*/
+export const backgroundColorNames: readonly BackgroundColorName[];
+
+/*
+Basic color names. The combination of foreground and background color names.
+*/
+export const colorNames: readonly ColorName[];
+
+declare const ansiStyles: {
+	readonly modifier: Modifier;
+	readonly color: ColorBase & ForegroundColor;
+	readonly bgColor: ColorBase & BackgroundColor;
+	readonly codes: ReadonlyMap<number, number>;
+} & ForegroundColor & BackgroundColor & Modifier & ConvertColor;
+
+export default ansiStyles;

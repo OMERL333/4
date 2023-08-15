@@ -1,11 +1,19 @@
-A JSON with color names and its values. Based on http://dev.w3.org/csswg/css-color/#named-colors.
+# @babel/parser
 
-[![NPM](https://nodei.co/npm/color-name.png?mini=true)](https://nodei.co/npm/color-name/)
+> A JavaScript parser
 
+See our website [@babel/parser](https://babeljs.io/docs/babel-parser) for more information or the [issues](https://github.com/babel/babel/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3A%22pkg%3A%20parser%22+is%3Aopen) associated with this package.
 
-```js
-var colors = require('color-name');
-colors.red //[255,0,0]
+## Install
+
+Using npm:
+
+```sh
+npm install --save-dev @babel/parser
 ```
 
-<a href="LICENSE"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/MIT_logo.svg" width="120"/></a>
+or using yarn:
+
+```sh
+yarn add @babel/parser --dev
+```
